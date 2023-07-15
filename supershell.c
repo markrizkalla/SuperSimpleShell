@@ -22,6 +22,8 @@ int main(void)
 	char * buffer = malloc(1024);
 	size_t len = 1024;
 
+	
+        char d[] = " \n";
 
 	if(pid == 0){
 	      
@@ -31,11 +33,17 @@ int main(void)
 
                 getline(&buffer , &len , stdin);
 
-                 buffer[strcspn(buffer, "\n")] = 0;
+               //  buffer[strcspn(buffer, "\n")] = 0;
 
-                char *argv[] = {buffer,NULL,"/usr/",NULL};
+		char * portion = strtok(buffer,d);
+		char * portion2 = strtok(NULL,d);
 
-                      execve(argv[0], argv, NULL);
+		printf("%s\n",portion);
+
+		
+                char *argv[] = {portion,portion2,NULL};
+
+                      execvp(argv[0], argv);
                }	
 	}
 	return (0);
